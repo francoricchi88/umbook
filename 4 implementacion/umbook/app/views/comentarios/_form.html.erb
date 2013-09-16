@@ -1,0 +1,14 @@
+
+
+	<form action="/comentarios/create" method="post">
+    		<div class="input-group input-group-sm">
+      			<input type="text" class="form-control" name=comentario[contenido]>
+			<span class="input-group-btn">
+			<input type="hidden" name="comentario[publicacion_id]" value=<%=publicacion.id%>>
+			
+                                <button class="btn btn-default" type="submit">Comentar</button>
+                        </span>
+
+    		</div><!-- /input-group -->
+	</form>
+

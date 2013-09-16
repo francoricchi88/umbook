@@ -1,0 +1,25 @@
+
+<div class="row">
+  <div class="col-lg-10">
+	<%if @usuario_amigo.publicacions.last%>
+                <% if @usuario_amigo.publicacions.last.errors.any? %>
+                        <div class="alert alert-danger">
+                                <% @publicacion.publicacions.last.errors.full_messages.each do |msg| %>
+                                        <strong>Error </strong> <%=msg%><br>
+                                <% end %>
+                        </div>
+                <% end %>
+        <%end%>
+	<form action="/publicacions/create" method="post">
+    		<div class="input-group input-group-lg">
+      			<textarea class="form-control" name=publicacion[contenido]> </textarea>
+			<input type="hidden"  name=publicacion[usuario_id] value= <%=@usuario_amigo.id%>>
+
+			<span class="input-group-btn">
+                                <button class="btn btn-default" type="submit">Publicar</button>
+                        </span>
+
+    		</div><!-- /input-group -->
+	</form>
+  </div><!-- /.col-lg-6 -->
+</div><!-- /row -->

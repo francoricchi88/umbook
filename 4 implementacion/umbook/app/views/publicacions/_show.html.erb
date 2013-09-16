@@ -1,0 +1,53 @@
+
+<div class="row">	
+  <div class="col-lg-10">
+    <% current_usuario.publicacions.reverse.each do |publicacion| %>
+      <br>
+      <br>
+      <div class=row>
+        <div class="bs-example">
+          <div class="media">
+            <!--<a class="pull-left" href="#">
+              <img class="media-object" src="..." alt="...">
+            </a> -->
+            <div class="media-body">
+              <h3 class="media-heading"><%=publicacion.autor%></h3>
+              <%=publicacion.contenido%>
+
+              <% publicacion.comentarios.each do |comentario| %>
+
+                <div class="media">
+                  <!--<a class="pull-left" href="#">
+                    <img class="media-object" src="..." alt="...">
+                  </a>--> 
+                  <div class="media-body">
+                    <h4 class="media-heading">&nbsp;&nbsp;<%=comentario.autor%></h4>
+                    &nbsp;&nbsp;&nbsp;<%=comentario.contenido%>
+                </div>
+              </div>
+            <%end%>
+          </div>
+
+        </div>
+      </div><!--example-->
+    </div> <!-- /row -->
+    <div class=row>
+      <form action="/comentarios/create" method="post">
+        <div class="input-group input-group-sm">
+          <textarea class="form-control" name=comentario[contenido]> </textarea>
+          <span class="input-group-btn">
+            <input type="hidden" name="comentario[publicacion_id]" value=<%=publicacion.id%>>
+
+            <button class="btn btn-default" type="submit">Comentar</button>
+          </span>
+
+        </div><!-- /input-group -->
+      </form>
+
+
+    </div><!-- /row -->
+  <%end%>
+
+</div><!-- /.col-lg-6 -->
+
+</div><!-- /row -->

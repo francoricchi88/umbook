@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Umbook</title>
+  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+   <% if flash[:notice]%>	
+    	<div class="alert alert-danger">
+    		<strong>Error en inicio de sesión</strong> <%=flash[:notice] %>
+    	</div>
+    <%end%>
+
+    <% if flash[:successful] %>
+	<div class="alert alert-success">
+        	<strong>Registro exitoso</strong> <%=flash[:successful] %>
+    	</div>
+    <%end%>	
+<div style="padding: 20px;">	
+<%= yield %>
+</div>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="../../assets/ico/favicon.png">
+
+    <title>Off Canvas Template for Bootstrap</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="../../assets/stylesheets/bootstrap.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="../../assets/stylesheets/offcanvas.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="../../assets/js/html5shiv.js"></script>
+      <script src="../../assets/js/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <%= render 'usuarios/navbar'%>
+    <div class="container">
+	<%=render 'usuarios/navbar'%>
+
+	<table class="table table-hover">
+        	<thead>
+          		<tr>
+            
+            		<th>Usuario</th>
+            
+          		</tr>
+        	</thead>
+		
+        	<tbody>
+			<% if @usuarios.empty? %>
+				No se encontraron coincidencias
+			<%else%>
+	
+				<% @usuarios.each do |usuario|%>
+			
+         		 		<tr>
+            					<td><a href='/usuarios/show/<%=usuario.id%>'><%=usuario.nombre+" "+usuario.apellido%></a> </td>
+						<td>
+							<% if @usuario.tiene_de_amigo_a(usuario.id)%>
+                                                		Amigo
+							<%else%>
+							<%if @usuario.tiene_solicitud_de(usuario.id)%>
+								<form action='/solicituds/accept' method='post' >
+									<input type="hidden" name="solicitud[id_emisor]" value="<%=usuario.id.to_s%>">
+									<button type='submit' class='btn btn-success'>Aceptar solicitud</button>
+								</form>		    	
+							<%else%>
+							<%if @usuario.envio_solicitud_a (usuario.id)%>
+								Esperando respuesta
+							<%else%>
+								<form action='/solicituds/create' method='post' >
+									<input type="hidden" name="solicitud[id_receptor]" value="<%=usuario.id.to_s%>">
+                                                        		<button type='submit' class='btn btn-default'>Agregar a amigos</button>
+                                                		</form>	
+							<%end%>
+							<%end%>		
+							<%end%>			
+						</td>
+         		 		</tr>
+				<% end%>
+			<%end%>	
+        	</tbody>
+	</table>
+   </div>
+ </body>
+<hr>
+
+      <footer>
+        <p>&copy; Company 2013</p>
+      </footer>
+
+    </div><!--/.container-->
+
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="//code.jquery.com/jquery.js"></script>
+    <script src="../../assets/javascripts/bootstrap.js"></script>
+    <script src="../../assets/javascripts/offcanvas.js"></script>
+                                                	

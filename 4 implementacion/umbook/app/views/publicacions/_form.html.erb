@@ -1,0 +1,16 @@
+
+<div class="row">
+  <div class="col-lg-10">
+    <form action="/publicacions/create" method="post">
+      <div class="input-group input-group-lg">
+        <textarea class="form-control" name=publicacion[contenido]></textarea>
+        <input type="hidden"  name=publicacion[usuario_id] value= <%=current_usuario.id%>>
+
+        <span class="input-group-btn">
+          <button class="btn btn-default" type="submit">Publicar</button>
+        </span>
+
+      </div><!-- /input-group -->
+    </form>
+  </div><!-- /.col-lg-6 -->
+</div><!-- /row -->
