@@ -5,8 +5,9 @@ class PublicacionsController < ApplicationController
   def create
     @usuario=Usuario.find(params[:publicacion][:usuario_id])
     @usuario_que_publico=current_usuario	
-    @usuario.publicacions.create(autor: (@usuario_que_publico.nombre + " "+ @usuario_que_publico.apellido),contenido: params[:publicacion][:contenido] )
-
+    publicacion= Publicacion.new(autor: @usuario_que_publico.to_s,contenido: params[:publicacion][:contenido])  
+    publicacion.usuario= @usuario
+    publicacion.save
     if @usuario.id.equal?(@usuario_que_publico.id)
       redirect_to '/usuarios/home/'
     else	

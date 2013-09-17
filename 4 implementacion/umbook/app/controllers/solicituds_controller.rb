@@ -5,7 +5,10 @@ class SolicitudsController < ApplicationController
   def create	 
 
     @usuario_receptor=Usuario.find(params[:solicitud][:id_receptor])
-    @usuario_receptor.solicituds.create(ref:current_usuario.id)
+    solicitud= Solicitud.new(ref: current_usuario.id)  
+    solicitud.usuario=@usuario_receptor
+    solicitud.save  
+    #@usuario_receptor.solicituds.create(ref:current_usuario.id)
     redirect_to '/usuarios/show/'+@usuario_receptor.id.to_s
   end
   def accept
@@ -13,8 +16,11 @@ class SolicitudsController < ApplicationController
     @solicitud.first.destroy
     @usuario_receptor=current_usuario
     @usuario_emisor=Usuario.find(params[:solicitud][:id_emisor])
-    @usuario_receptor.amistads.create(amigo: @usuario_emisor.id )
-    @usuario_emisor.amistads.create(amigo:@usuario_receptor.id )
+    Amistad.create(amigo: @usuario_emisor.id, usuario: @usuario_receptor)
+    Amistad.create(amigo: @usuario_receptor.id, usuario: @usuario_emisor)
+
+    #@usuario_receptor.amistads.create(amigo: @usuario_emisor.id )
+    #@usuario_emisor.amistads.create(amigo:@usuario_receptor.id )
     redirect_to '/usuarios/show/'+@usuario_emisor.id.to_s
 
   end

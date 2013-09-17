@@ -11,10 +11,7 @@
               <img class="media-object" src="..." alt="...">
             </a> -->
             <div class="media-body">
-              <h3 class="media-heading">
-                <%=publicacion.autor%>
-                <h5><%= publicacion.created_at.to_formatted_s(:short) %></h5>
-              </h3>
+              <h3 class="media-heading"><%=publicacion.autor%></h3>
               <%=publicacion.contenido%>
 
               <% publicacion.comentarios.each do |comentario| %>

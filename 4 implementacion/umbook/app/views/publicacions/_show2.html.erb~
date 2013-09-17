@@ -1,7 +1,7 @@
 
 <div class="row">	
   <div class="col-lg-10">
-    <% current_usuario.publicacions.reverse.each do |publicacion| %>
+    <% @usuario_amigo.publicacions.reverse.each do |publicacion| %>
       <br>
       <br>
       <div class=row>

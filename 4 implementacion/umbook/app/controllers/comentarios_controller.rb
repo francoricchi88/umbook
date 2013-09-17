@@ -5,7 +5,10 @@ class ComentariosController < ApplicationController
   def create
     @usuario=current_usuario
     @publicacion=Publicacion.find(params[:comentario][:publicacion_id])
-    @publicacion.comentarios.create(autor: (@usuario.nombre + " "+ @usuario.apellido),contenido: params[:comentario][:contenido] )
+    comentario= Comentario.new(autor: @usuario.to_s, contenido: params[:comentario][:contenido])
+    comentario.publicacion=@publicacion
+    comentario.save  
+
 
     if @publicacion.usuario.id.equal?(@usuario.id) 
       redirect_to '/usuarios/home'
